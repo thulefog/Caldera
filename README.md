@@ -4,6 +4,10 @@ Garibaldi is a reference to [Mount Garibaldi](https://en.wikipedia.org/wiki/Moun
 
 This builds on work enabling the iPhone camera as a capture device and channeling to a Metal pipeline creates an explosion of pixel data, a volcano of sorts.
 
+🚧 NOTE: The foundation models integrated and enabled as user selections are being evaluated and not included or reposed yet. 
+
+The intent is to reduce iOS application bundle footprint while the models and feature sets settle out. See the `Reference` section for more details around some of the baseline Foundation Models from Apple.
+
 # Abstract
 
 The original context for the code behind the original rough concept proof dates back to workbench learning in 2018 around a Metal based camera pipeline and evolution into early steps with a set of Machine Learning foundation models.
