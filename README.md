@@ -23,15 +23,19 @@ Reference the breakdown of the workflow features summarized in the table below.
 
 The user interface under construction is illustrated below.
 
-These screens represent the workflow to select or capture an image, then post process in augumentation or classification pathways. The `
+These screens represent the workflow to select or capture an image, then post process in augumentation or classification pathways. 
 
 - 2D
+
+There are concept proof, works in progress, features related to 2D static image capture and post processing.
 
 | Augmentation | Classification |
 |--|--|
 | <img src="/images/mtg-augment.png" alt="augment" width="256"> | <img src="/images/mtg-classify.png" alt="classify" width="256">  |
 
 - 3D
+
+There is a concept proof feature related to loading a 3D STL format point cloud into a `SceneKit` view. Note that this is being reworked to shift to `RealityKit` based on the Apple framework evolution paths.
 
 | Select | Render |
 |--|--|
