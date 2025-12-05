@@ -29,19 +29,19 @@ These screens represent the workflow to select or capture an image, then post pr
 
 | Augmentation | Classification |
 |--|--|
-| <img src="/images/mtg-augment.png" alt="augment" width="400"> | <img src="/images/mtg-classify.png" alt="classify" width="400">  |
+| <img src="/images/mtg-augment.png" alt="augment" width="256"> | <img src="/images/mtg-classify.png" alt="classify" width="256">  |
 
 - 3D
 
 | Select | Render |
 |--|--|
-| <img src="/images/mtg-surface-render-1.png" alt="select" width="400"> | <img src="/images/mtg-surface-render-2.png" alt="render" width="400">  |
+| <img src="/images/mtg-surface-render-1.png" alt="select" width="256"> | <img src="/images/mtg-surface-render-2.png" alt="render" width="256">  |
 
 NOTE: Example STL point clouds were sourced from the NIH 3D download set, [here](https://3d.nih.gov/discover?q=brain&sort=relevant).
 
 # References
 
-- Classifier
+As relates to the image capture and `Classification` pathways there are some common denonimators, code level, with the separate open source project, [Cinder Code](https://github.com/thulefog/CinderCone/tree/develop)
 
 Reference this code example which was uses `MobileNet` model
 [Apple Sample Code: Classifying Images with Vision and Core ML](https://developer.apple.com/documentation/coreml/classifying-images-with-vision-and-core-ml)
