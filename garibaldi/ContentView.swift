@@ -22,7 +22,7 @@ struct ContentView: View {
                 Label("Augmentation", systemImage: "tortoise.circle")
             }
             NavigationView {
-                TextureDisplayViewport()
+                MetalTextureViewport()
                 .navigationTitle("Texture")
                 .navigationBarTitleDisplayMode(.inline)
             }
