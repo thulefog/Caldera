@@ -9,6 +9,8 @@ import MetalKit
 
 // MARK: Metal Texture Viewport (outer)
 
+// MetalTextureViewport > MetalTextureView > TextureDisplayView
+
 struct MetalTextureViewport: View {
     @State private var texture: MTLTexture?
     
@@ -28,7 +30,11 @@ struct MetalTextureViewport: View {
             .SRGB: false,
             .generateMipmaps: false
         ])
+        
+        print( "\(#function): Texture: {w,h}: \(texture?.width) / \(texture?.height)" )
+        return
     }
+
 }
 
 // MARK: - Aspect Ratio Handling
@@ -37,6 +43,61 @@ enum AspectRatioMode {
     case fit       // Letterbox/pillarbox to fit entirely
     case fill      // Crop to fill the view
     case stretch   // Distort to fill
+}
+
+// MARK: UI Binding Representable (middle)
+
+#if os(iOS)
+typealias ViewRepresentable = UIViewRepresentable
+#else
+typealias ViewRepresentable = NSViewRepresentable
+#endif
+
+struct MetalTextureView: ViewRepresentable {
+    let texture: MTLTexture?
+    
+    func makeNSView(context: Context) -> TextureDisplayView {
+        let device = MTLCreateSystemDefaultDevice()!
+        let view = TextureDisplayView(frame: .zero, device: device)!
+        return view
+    }
+    
+    func updateNSView(_ view: TextureDisplayView, context: Context) {
+        view.displayTexture = texture
+    }
+    
+    #if os(iOS)
+    func makeUIView(context: Context) -> TextureDisplayView {
+        makeView(context: context)
+    }
+
+    func updateUIView(_ view: TextureDisplayView, context: Context) {
+        updateView(view, context: context)
+    }
+    #else
+    func makeNSView(context: Context) -> TextureDisplayView {
+        makeView()
+    }
+
+    func updateNSView(_ view: TextureDisplayView, context: Context) {
+        updateView(view)
+    }
+    #endif
+
+    func makeView(context: Context) -> TextureDisplayView {
+        print("\(#function): Texture: \(texture).")
+        let device = MTLCreateSystemDefaultDevice()!
+        let view = TextureDisplayView(frame: .zero, device: device)!
+        //NB: texture unset, so vertex reset not triggered, yet
+        view.aspectRatioMode = .fit
+        return view
+    }
+    
+    func updateView(_ view: TextureDisplayView, context: Context) {
+        print("\(#function): Texture: \(texture).")
+        view.displayTexture = texture
+        view.aspectRatioMode = .fit
+    }
 }
 
 
@@ -179,6 +240,9 @@ class TextureDisplayView: MTKView {
         } else {
             textureAspect = 16.0 / 9.0
         }
+
+        print( "\(#function): Display Texture: \(displayTexture)" )
+        print( "\(#function): View Aspect: \(drawableSize.width)/\(drawableSize.height) / Texture Aspect: \(textureAspect)" )
         
         var scaleX: Float = 1.0
         var scaleY: Float = 1.0
@@ -220,54 +284,3 @@ class TextureDisplayView: MTKView {
     }
 }
 
-import SwiftUI
-
-#if os(iOS)
-typealias ViewRepresentable = UIViewRepresentable
-#else
-typealias ViewRepresentable = NSViewRepresentable
-#endif
-
-struct MetalTextureView: ViewRepresentable {
-    let texture: MTLTexture?
-    
-    func makeNSView(context: Context) -> TextureDisplayView {
-        let device = MTLCreateSystemDefaultDevice()!
-        let view = TextureDisplayView(frame: .zero, device: device)!
-        return view
-    }
-    
-    func updateNSView(_ view: TextureDisplayView, context: Context) {
-        view.displayTexture = texture
-    }
-    
-    #if os(iOS)
-    func makeUIView(context: Context) -> TextureDisplayView {
-        makeView(context: context)
-    }
-
-    func updateUIView(_ view: TextureDisplayView, context: Context) {
-        updateView(view, context: context)
-    }
-    #else
-    func makeNSView(context: Context) -> TextureDisplayView {
-        makeView()
-    }
-
-    func updateNSView(_ view: TextureDisplayView, context: Context) {
-        updateView(view)
-    }
-    #endif
-
-
-    func makeView(context: Context) -> TextureDisplayView {
-        let device = MTLCreateSystemDefaultDevice()!
-        let view = TextureDisplayView(frame: .zero, device: device)!
-        view.aspectRatioMode = .fit
-        return view
-    }
-    
-    func updateView(_ view: TextureDisplayView, context: Context) {
-        view.displayTexture = texture
-    }
-}
