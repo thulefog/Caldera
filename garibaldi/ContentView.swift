@@ -22,6 +22,15 @@ struct ContentView: View {
                 Label("Augmentation", systemImage: "tortoise.circle")
             }
             NavigationView {
+                TextureDisplayViewport()
+                .navigationTitle("Texture")
+                .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem {
+                Label("Texture", systemImage: "lizard")
+            }
+/*
+            NavigationView {
                 ClassificationView()
                 .navigationTitle("Classification")
                 .navigationBarTitleDisplayMode(.inline)
@@ -29,6 +38,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Classifier", systemImage: "lizard")
             }
+ */
             NavigationView {
                 PredictorView()
                 .navigationTitle("Predictor")
