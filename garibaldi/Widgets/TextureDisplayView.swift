@@ -100,7 +100,6 @@ struct MetalTextureView: ViewRepresentable {
     }
 }
 
-
 // MARK: Texture Display View (inner)
 
 class TextureDisplayView: MTKView {
@@ -109,16 +108,41 @@ class TextureDisplayView: MTKView {
     private var renderPipelineState: MTLRenderPipelineState!
     private var samplerState: MTLSamplerState!
     private var vertexBuffer: MTLBuffer!
+    private var isGrayscaleBuffer: MTLBuffer!
     
     var aspectRatioMode: AspectRatioMode = .fit {
         didSet { updateVertexBuffer() }
     }
     
-    // The texture to display
     var displayTexture: MTLTexture? {
-        didSet { setNeedsDisplay() }
+        didSet {
+            updateGrayscaleFlag()
+            
+            updateVertexBuffer()  // Recalculate when texture changes
+            setNeedsDisplay()
+        }
     }
-    
+
+    // Address artifact whereby with default texture load into view, by treating single channel formats as grayscale
+    // The display time arfifact is that a grayscale image would have a red tint
+    // This could be accomplished in the shader but this approach keeps some shader logic streamlined
+    //
+    // Reference: [MTLTexture](https://developer.apple.com/documentation/metal/mtltexture/)
+    //
+    private func updateGrayscaleFlag() {
+        var isGrayscale: Bool = false
+        if let texture = displayTexture {
+            let format = texture.pixelFormat
+            isGrayscale = (format == .r8Unorm ||
+                           format == .r8Snorm ||
+                           format == .r16Unorm ||
+                           format == .r16Float ||
+                           format == .r32Float)
+        }
+        isGrayscaleBuffer = device?.makeBuffer(bytes: &isGrayscale,
+                                                length: MemoryLayout<Bool>.size,
+                                                options: .storageModeShared)
+    }
     // MARK: - Initialization
     
     init?(frame: CGRect, device: MTLDevice) {
@@ -137,57 +161,58 @@ class TextureDisplayView: MTKView {
         
         commandQueue = device.makeCommandQueue()
         
-        // Configure view
         colorPixelFormat = .bgra8Unorm
         framebufferOnly = true
-        enableSetNeedsDisplay = true  // Manual refresh mode
-        isPaused = true               // We'll draw on demand
+        enableSetNeedsDisplay = true
+        isPaused = true
         
         setupPipeline()
         setupSampler()
+        updateVertexBuffer()  // Initialize with default vertices
     }
     
     // MARK: - Pipeline Setup
     
+    // setupPipeline: set up the texture painting step, taking in account the vertices and color channels
+    // NOTE: The vertex_passthrough step is key to ensure the correct (requested) aspect ratio is applied instead of (always) stretching
+    
     private func setupPipeline() {
+        
         let shaderSource = """
         #include <metal_stdlib>
         using namespace metal;
+        
+        struct Vertex {
+            float2 position;
+            float2 texCoord;
+        };
         
         struct VertexOut {
             float4 position [[position]];
             float2 texCoord;
         };
         
-        vertex VertexOut vertex_passthrough(uint vertexID [[vertex_id]]) {
-            // Full-screen quad using vertex ID
-            float2 positions[4] = {
-                float2(-1, -1),
-                float2( 1, -1),
-                float2(-1,  1),
-                float2( 1,  1)
-            };
-            
-            float2 texCoords[4] = {
-                float2(0, 1),
-                float2(1, 1),
-                float2(0, 0),
-                float2(1, 0)
-            };
-            
+        vertex VertexOut vertex_passthrough(const device Vertex* vertices [[buffer(0)]],
+                                            uint vertexID [[vertex_id]]) {
             VertexOut out;
-            out.position = float4(positions[vertexID], 0, 1);
-            out.texCoord = texCoords[vertexID];
+            out.position = float4(vertices[vertexID].position, 0, 1);
+            out.texCoord = vertices[vertexID].texCoord;
             return out;
         }
         
         fragment float4 fragment_texture(VertexOut in [[stage_in]],
                                          texture2d<float> texture [[texture(0)]],
-                                         sampler textureSampler [[sampler(0)]]) {
-            return texture.sample(textureSampler, in.texCoord);
+                                         sampler textureSampler [[sampler(0)]],
+                                         constant bool &isGrayscale [[buffer(0)]]) {
+            float4 color = texture.sample(textureSampler, in.texCoord);
+            if (isGrayscale) {
+                // Broadcast red channel to all RGB
+                return float4(color.r, color.r, color.r, 1.0);
+            }
+            return color;
         }
         """
-        
+    
         guard let device = self.device,
               let library = try? device.makeLibrary(source: shaderSource, options: nil) else {
             fatalError("Failed to create shader library")
@@ -210,6 +235,20 @@ class TextureDisplayView: MTKView {
         samplerState = device?.makeSamplerState(descriptor: descriptor)
     }
     
+    // MARK: - Layout
+    
+    #if os(macOS)
+    override func setFrameSize(_ newSize: NSSize) {
+        super.setFrameSize(newSize)
+        updateVertexBuffer()
+    }
+    #else
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateVertexBuffer()
+    }
+    #endif
+    
     // MARK: - Drawing
     
     override func draw(_ rect: CGRect) {
@@ -222,8 +261,16 @@ class TextureDisplayView: MTKView {
         }
         
         encoder.setRenderPipelineState(renderPipelineState)
+
+        // NB: Bind vertex buffer
+        //     This is key to make sure the determined vertex location is applied
+        //     Considers texture to draw against drawable view/area, and aspect ratios for each
+        encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setFragmentSamplerState(samplerState, index: 0)
+        
+        //NOTE: Addresses display artifact with grayscale image, a red tint w/o correction
+        encoder.setFragmentBuffer(isGrayscaleBuffer, offset: 0, index: 0)
         encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
         encoder.endEncoding()
         
@@ -232,6 +279,8 @@ class TextureDisplayView: MTKView {
     }
     
     private func updateVertexBuffer() {
+        guard drawableSize.width > 0, drawableSize.height > 0 else { return }
+        
         let viewAspect = drawableSize.width / drawableSize.height
         let textureAspect: CGFloat
         
@@ -240,9 +289,6 @@ class TextureDisplayView: MTKView {
         } else {
             textureAspect = 16.0 / 9.0
         }
-
-        print( "\(#function): Display Texture: \(displayTexture)" )
-        print( "\(#function): View Aspect: \(drawableSize.width)/\(drawableSize.height) / Texture Aspect: \(textureAspect)" )
         
         var scaleX: Float = 1.0
         var scaleY: Float = 1.0
@@ -281,6 +327,11 @@ class TextureDisplayView: MTKView {
             length: MemoryLayout<Vertex>.stride * vertices.count,
             options: .storageModeShared
         )
+       
+        print( "\(#function): View Aspect: \(drawableSize.width)/\(drawableSize.height) / Texture Aspect: \(textureAspect)" )
+        print( "\(#function): Display Texture: \(displayTexture)" )
+        print( "\(#function): Vertices: \(vertices)" )
+        
+        setNeedsDisplay()
     }
 }
-
