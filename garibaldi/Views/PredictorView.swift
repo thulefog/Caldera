@@ -18,62 +18,35 @@
 //
 
 import SwiftUI
+enum ImageSource {
+    case undefined
+    case camera
+    case photos
+}
 
 struct PredictorView: View {
-    @State private var input = "model"
+    @State private var input = ImageSource.undefined
     
     var body: some View {
         NavigationView {
             VStack {
                 MainViewRepresentable( input: $input )
                     .navigationTitle("Predict")
-                HStack {
-                    Spacer( minLength: 10 )
-                    Divider()
-                    Button(action: {
-                        print("Handling user request")
-                        input = "test"
-                    }) {
-                        Label("Start", systemImage: "water.waves")
-                    } // button
-                    .buttonStyle(.borderedProminent)
 
-                    Button(action: {
-                        print("Handling user request")
-                        input = "test"
-                    }) {
-                        Label("Stop", systemImage: "water.waves.slash")
-                    } // button
-                    .buttonStyle(.borderedProminent)
-
-                    Button(action: {
-                        print("Handling user request")
-                        input = "test"
-                    }) {
-                        Label("Flush", systemImage: "toilet")
-                    } // button
-                    .buttonStyle(.borderedProminent)
-                    .tint(.gray)
-
-                    Divider()
-
-                    Spacer( minLength: 10 )
-                }.frame(width: 500, height: 80)
-                Spacer( minLength: 10 )
             } // vstack
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Menu {
                         Button(action: {
-                            // TODO: ....
+                            input = .camera
                         }) {
-                            Label("Step One", systemImage: "perspective")
+                            Label("Camera Source", systemImage: "perspective")
                         } // button
                         Divider()
                         Button(action: {
-                            // TODO: ....
+                            input = .photos
                         }) {
-                            Label("Step Two", systemImage: "perspective")
+                            Label("Photo Source", systemImage: "perspective")
                         } // button
                         
                     } label: {
@@ -86,26 +59,28 @@ struct PredictorView: View {
 }
 
 struct MainViewRepresentable: UIViewControllerRepresentable {
-    @Binding var input: String
+    @Binding var input: ImageSource
     typealias UIViewControllerType = MainViewController // Wrapped UIViewController subclass
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         return storyboard.instantiateViewController(withIdentifier: "MainViewControllerID") as! MainViewRepresentable.UIViewControllerType
     }
-    // NB: to enable mixture of SwiftUI wrapping UIKit based on a storyboard, the above replaces below:
-    //     func makeUIViewController(context: Context) -> UIViewControllerType { return MainViewController() }
-    
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         // Update the UIViewController based on SwiftUI state if needed
         print("\(#function): Requested session state: \(input).")
 
-
-        // uiViewController.input = ...
+        switch input {
+        case .camera:
+            uiViewController.singleTap()
+        case .photos:
+            uiViewController.doubleTap()
+        default:
+            break
+        }
     }
 }
-
 
 import UIKit
 
