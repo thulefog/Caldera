@@ -34,6 +34,7 @@ struct MetalTextureViewport: View {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("Clear") {
                             selectedFileURL = nil
+                            loadTexture()
                         }
                     }
                 }
@@ -450,7 +451,7 @@ class TextureDisplayView: MTKView {
         encoder.setFragmentTexture(texture, index: 0)
         encoder.setFragmentSamplerState(samplerState, index: 0)
         
-        /NOTE: Addresses display artifact with grayscale image, a red tint w/o correction
+        //NOTE: Addresses display artifact with grayscale image, a red tint w/o correction
         encoder.setFragmentBuffer(isGrayscaleBuffer, offset: 0, index: 0)
         
         encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
