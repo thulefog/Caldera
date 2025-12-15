@@ -19,11 +19,11 @@ Reference the breakdown of the workflow features summarized in the table below.
 |Workflow|Description|
 |--|--|
 | Augmentation | Minimal image filter set based on OpenCV2 | 
-| Texture | Refactor incremenet to generalize a classification pipeline |
+| Texture | Minimal image viewer using a `Metal` texture based canvas |
 | Predictor | Primitive image classification based on the `MobileNet` model |
 | Surface Render | Provides ability to load an STL 3D point cloud and render in a `SceneKit` view |
 
-A refactor increment to generalize a classification pipeline is part of a spike in progress, but was replaced with a static (single frame) image viewer that is based on `Metal` and specifically textures. 
+A refactor increment to generalize a classification pipeline is part of a spike in progress, but was replaced with a static (single frame) image viewer that is based on `Metal` and makes specific use of textures as a GPU pipeline enabler.
 
 ## User Interface 
 
