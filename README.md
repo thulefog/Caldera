@@ -63,7 +63,7 @@ NOTE: This approach showed some sensitivity with switching from Swift version 5 
 This code sample was not used but as reference point - uses a diffent `Core ML Model`, `ObjectDetector` approach: [Apple Sample Code: Recognizing Objects in Live Capture](
 https://developer.apple.com/documentation/vision/recognizing-objects-in-live-capture)
 
-[Apple: Core ML Models](https://developer.apple.com/machine-learning/models)
+See also, the baseline foundation model set: [Apple: Core ML Models](https://developer.apple.com/machine-learning/models)
 
 - Metal
 
