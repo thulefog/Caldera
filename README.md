@@ -19,9 +19,11 @@ Reference the breakdown of the workflow features summarized in the table below.
 |Workflow|Description|
 |--|--|
 | Augmentation | Minimal image filter set based on OpenCV2 | 
-| Classification | Refactor incremenet to generalize a classification pipeline |
+| Texture | Refactor incremenet to generalize a classification pipeline |
 | Predictor | Primitive image classification based on the `MobileNet` model |
 | Surface Render | Provides ability to load an STL 3D point cloud and render in a `SceneKit` view |
+
+A refactor increment to generalize a classification pipeline is part of a spike in progress, but was replaced with a static (single frame) image viewer that is based on `Metal` and specifically textures. 
 
 ## User Interface 
 
@@ -35,7 +37,7 @@ There are concept proof, works in progress, features related to 2D static image 
 
 | Augmentation | Classification |
 |--|--|
-| <img src="/images/mtg-augment.png" alt="augment" width="256"> | <img src="/images/mtg-classify.png" alt="classify" width="256">  |
+| <img src="/statics/mtg-augment.png" alt="augment" width="256"> | <img src="/statics/mtg-predict.png" alt="predict" width="256">  |
 
 - 3D
 
@@ -43,7 +45,7 @@ There is a concept proof feature related to loading a 3D STL format point cloud 
 
 | Select | Render |
 |--|--|
-| <img src="/images/mtg-surface-render-1.png" alt="select" width="256"> | <img src="/images/mtg-surface-render-2.png" alt="render" width="256">  |
+| <img src="/statics/mtg-surface-render-1.png" alt="select" width="256"> | <img src="/statics/mtg-surface-render-2.png" alt="render" width="256">  |
 
 NOTE: Example STL point clouds were sourced from the NIH 3D download set, [here](https://3d.nih.gov/discover?q=brain&sort=relevant).
 
