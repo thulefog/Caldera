@@ -78,8 +78,6 @@ struct ImageFilterView: View {
                     .onChange(of: processingType) { _ in
                         if let image = selectedImage {
                             processedImage = ImageFilterProvider.processImage( image, type: processingType )
-                            //selectedImage = processedImage
-                            //{_ in }
                         }
                     }
                 }
