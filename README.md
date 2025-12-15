@@ -53,14 +53,19 @@ NOTE: Example STL point clouds were sourced from the NIH 3D download set, [here]
 
 As relates to the image capture and `Classification` pathways there are some common denonimators, code level, with the separate open source project, [Cinder Code](https://github.com/thulefog/CinderCone/tree/develop)
 
-Reference this code example which was uses `MobileNet` model
-[Apple Sample Code: Classifying Images with Vision and Core ML](https://developer.apple.com/documentation/coreml/classifying-images-with-vision-and-core-ml)
+- Machine Learning Models
 
-No parts of this code sample were used but uses a diffent `Core ML Model`, `ObjectDetector`
-[Apple Sample Code: Recognizing Objects in Live Capture](
+Reference this code example which was uses `MobileNet` model
+[Apple Sample Code: Classifying Images with Vision and Core ML](https://developer.apple.com/documentation/coreml/classifying-images-with-vision-and-core-ml) - which provied a baseline implementation to start from.
+
+NOTE: This approach showed some sensitivity with switching from Swift version 5 to 6 as far as concurrency changes in flight. The Swift Compiler** setting `Swift Language Version` needed to be left at Unspecified. In short, alternative approaches to what is described in that Apple example are being explored as offline homework.
+
+This code sample was not used but as reference point - uses a diffent `Core ML Model`, `ObjectDetector` approach: [Apple Sample Code: Recognizing Objects in Live Capture](
 https://developer.apple.com/documentation/vision/recognizing-objects-in-live-capture)
 
 [Apple: Core ML Models](https://developer.apple.com/machine-learning/models)
+
+- Metal
 
 [Metal Programming Guide,  Janie Clayton, Addison-Wesley, 2017](https://www.safaribooksonline.com/library/view/metal-programming-guide/9780134668963/ch06.xhtml)
 
