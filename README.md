@@ -41,13 +41,17 @@ These screens represent the workflow to select a pre-existing static single fram
 
 The `Augmentation` path sources 2D static image captures from the Photos application on iOS.
 
-Current augmentation paths include a few filters available in OpenCV such as blur, edge detection, grayscale and sharpening.
-
-The Texture pathway is noteworthy as it allows selection of any image available through the iOS Files application so iCloud stored files for example.
+Current augmentation paths include a few filters available in `OpenCV` such as blur, edge detection, grayscale and sharpening.
 
 | Texture | 
 |--|
 | <img src="/statics/mtg-texture.png" alt="augment" width="256"> | 
+
+The `Texture` pathway is noteworthy as it allows selection of any image available through the iOS Files application so iCloud stored files for example. 
+
+Also, this view is based on display of a Metal texture so basically this opens the door for advanced post-processing options using custom Metal shaders.
+
+---
 
 ### 3D: Point Cloud Surface Render Display
 
