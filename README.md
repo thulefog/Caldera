@@ -29,19 +29,27 @@ A refactor increment to generalize a classification pipeline is part of a spike 
 
 ## User Interface 
 
-The user interface under construction is illustrated below.
+The user interface screens under construction are illustrated below.
 
-These screens represent the workflow to select or capture an image, then post process in augumentation or classification pathways. 
+### 2D: Static Single Frame Image Display
 
-- 2D
-
-There are concept proof, works in progress, features related to 2D static image capture and post processing.
+These screens represent the workflow to select a pre-existing static single frame image, post process and display. 
 
 | Augmentation | Classification |
 |--|--|
 | <img src="/statics/mtg-augment.png" alt="augment" width="256"> | <img src="/statics/mtg-predict.png" alt="predict" width="256">  |
 
-- 3D
+The `Augmentation` path sources 2D static image captures from the Photos application on iOS.
+
+Current augmentation paths include a few filters available in OpenCV such as blur, edge detection, grayscale and sharpening.
+
+The Texture pathway is noteworthy as it allows selection of any image available through the iOS Files application so iCloud stored files for example.
+
+| Texture | 
+|--|
+| <img src="/statics/mtg-texture.png" alt="augment" width="256"> | 
+
+### 3D: Point Cloud Surface Render Display
 
 There is a concept proof feature related to loading a 3D STL format point cloud into a `SceneKit` view. Note that this is being reworked to shift to `RealityKit` based on the Apple framework evolution paths.
 
