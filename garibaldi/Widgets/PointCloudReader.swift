@@ -8,9 +8,8 @@ import SwiftUI
 import SceneKit
 import UniformTypeIdentifiers
 
+// MARK: STL Parser
 
-
-// STL Parser
 func parseSTLFile(data: Data) throws -> SCNGeometry {
     // Check if it's binary STL (starts with 80-byte header, then 4-byte triangle count)
     if data.count > 84 {
@@ -78,7 +77,8 @@ func parseBinarySTL(data: Data) throws -> SCNGeometry {
     return createGeometry(vertices: vertices, normals: normals, indices: indices)
 }
 
-// OBJ Parser
+// MARK: OBJ Parser
+
 struct OBJResult {
     let geometry: SCNGeometry
     let materials: [SCNMaterial]
@@ -265,7 +265,8 @@ func createOBJGeometry(vertices: [SCNVector3], normals: [SCNVector3], textureCoo
     return SCNGeometry(sources: sources, elements: [element])
 }
 
-// MTL Parser
+// MARK: MTL Parser
+
 func loadMTLFile(url: URL) -> [String: SCNMaterial] {
     var materials: [String: SCNMaterial] = [:]
     
