@@ -2,19 +2,29 @@
 
 Garibaldi is a reference to [Mount Garibaldi](https://en.wikipedia.org/wiki/Mount_Garibaldi) which is a dormant stratovolcano in southwest British Columbia.
 
-This builds on work enabling the iPhone camera as a capture device and channeling to a Metal pipeline creates an explosion of pixel data, a volcano of sorts.
+This builds on and evolves forward development projects on iOS and in Swift, Objective-C, C++ and Metal - some dating back to 2016-2018 to bring up Metal based cameras on the iPhone in iOS.
+
+The volcano metaphor stems from the fact that bringing a camera online as a capture device and with a Metal pipeline creates an explosion of pixel data, a volcano of sorts. 🌋
 
 **Current State:** Under Construction 🚧
+
+# Abstract
+
+The original context for the code behind the original rough concept proof dates back to workbench learnings around a Metal based camera pipeline.
+
+- This project `Garibaldi` is a variation on that theme but a narrower focus on post processing and display of 2D static images and 3D point clouds. 
+
+- This is a slight reduction in scope of a project mentioned in the references below `Cinder Cone` which brought forward the camera pipeline to align with latest Swift concurrency approaches, complete rewrite in effect.
+
+This rewrite and modernization of the 2D static single frame image display leverages code level lessons learned as well as changes and evolutions in the Apple frameworks and ecosystem.
+
+A current area of exploration and evolution is early steps with a set of Machine Learning foundation models. Also under consideration is __from scratch__ algorithms or Metal Shaders where it makes sense in the pre and post process steps.
 
 The foundation models integration and forward pass wire up points that will be enabled as user selections are being evaluated in local working source code branches. These are not included in the repository yet. 
 
 See the `Reference` section for more details around some of the baseline Foundation Models from Apple.
 
-# Abstract
-
-The original context for the code behind the original rough concept proof dates back to workbench learning in 2018 around a Metal based camera pipeline and evolution into early steps with a set of Machine Learning foundation models.
-
-This is a rewrite and modernization, leveraging code level lessons learned as well as changes and evolutions in the Apple frameworks and ecosystem.
+## Contexts
 
 Reference the breakdown of the workflow features summarized in the table below.
 
