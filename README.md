@@ -1,6 +1,6 @@
-# (Mount) Garibaldi
+# Caldera
 
-Garibaldi is a reference to [Mount Garibaldi](https://en.wikipedia.org/wiki/Mount_Garibaldi) which is a dormant stratovolcano in southwest British Columbia.
+[Caldera](https://en.wikipedia.org/wiki/Caldera) is term that refers to the large cauldron-like hollow that forms after a volcanic eruption, from the Latin `caldaria` that means "cooking pot". 
 
 This builds on and evolves forward development projects on iOS and in Swift, Objective-C, C++ and Metal - some dating back to 2016-2018 to bring up Metal based cameras on the iPhone in iOS.
 
@@ -12,7 +12,7 @@ The volcano metaphor stems from the fact that bringing a camera online as a capt
 
 The original context for the code behind the original rough concept proof dates back to workbench learnings around a Metal based camera pipeline.
 
-- This project `Garibaldi` is a variation on that theme but a narrower focus on post processing and display of 2D static images and 3D point clouds. 
+- This project `Caldera` is a variation on that theme but a narrower focus on post processing and display of 2D **static** single frame images and 3D point clouds, in contrast to dynamic data captures.
 
 - This is a slight reduction in scope of a project mentioned in the references below `Cinder Cone` which brought forward the camera pipeline to align with latest Swift concurrency approaches, complete rewrite in effect.
 
@@ -97,11 +97,7 @@ See also, the baseline foundation model set: [Apple: Core ML Models](https://dev
 
 # Software License
 
-Selected components of this project are a derivative of MetalRenderCamera, originally licensed under the Apache License, Version 2.0. This version includes additional modifications described herein. Portions of this code are reproduced under the terms of the Apache License, Version 2.0.
-
-The original open source code used as a starting point was Apache 2.0 licensed. Changes in Swift around @objc inference called for slight local changes to the original code published on Github by the original author. Addditional adjustments surfaced that were needed due to the Swift 5.x to 6.x changes.
-
-The rest of the source code is under the MIT License as per below:
+This source code was a derivative of the [Cinder Code](https://github.com/thulefog/CinderCone/tree/develop) and, similarly, reflects a rewrite to remve external SOUP as part of the uplevel to latest Swift concurrency languages, 6.x and forward.
 
 MIT License
 
