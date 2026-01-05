@@ -11,13 +11,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D708C5FA2DF3FE3D003B9C67 /* garibaldi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = garibaldi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D708C5FA2DF3FE3D003B9C67 /* Caldera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Caldera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D708C5FC2DF3FE3D003B9C67 /* garibaldi */ = {
+		D708C5FC2DF3FE3D003B9C67 /* caldera */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = garibaldi;
+			path = caldera;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -37,7 +37,7 @@
 		D708C5F12DF3FE3D003B9C67 = {
 			isa = PBXGroup;
 			children = (
-				D708C5FC2DF3FE3D003B9C67 /* garibaldi */,
+				D708C5FC2DF3FE3D003B9C67 /* caldera */,
 				D708C5FB2DF3FE3D003B9C67 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,7 +45,7 @@
 		D708C5FB2DF3FE3D003B9C67 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D708C5FA2DF3FE3D003B9C67 /* garibaldi.app */,
+				D708C5FA2DF3FE3D003B9C67 /* Caldera.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,9 +53,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D708C5F92DF3FE3D003B9C67 /* garibaldi */ = {
+		D708C5F92DF3FE3D003B9C67 /* Caldera */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D708C6052DF3FE3E003B9C67 /* Build configuration list for PBXNativeTarget "garibaldi" */;
+			buildConfigurationList = D708C6052DF3FE3E003B9C67 /* Build configuration list for PBXNativeTarget "Caldera" */;
 			buildPhases = (
 				D708C5F62DF3FE3D003B9C67 /* Sources */,
 				D708C5F72DF3FE3D003B9C67 /* Frameworks */,
@@ -66,14 +66,14 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D708C5FC2DF3FE3D003B9C67 /* garibaldi */,
+				D708C5FC2DF3FE3D003B9C67 /* caldera */,
 			);
-			name = garibaldi;
+			name = Caldera;
 			packageProductDependencies = (
 				D7217C1D2EB5883F0022EC05 /* OpenCV */,
 			);
 			productName = Sandbox;
-			productReference = D708C5FA2DF3FE3D003B9C67 /* garibaldi.app */;
+			productReference = D708C5FA2DF3FE3D003B9C67 /* Caldera.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -91,7 +91,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D708C5F52DF3FE3D003B9C67 /* Build configuration list for PBXProject "Garibaldi" */;
+			buildConfigurationList = D708C5F52DF3FE3D003B9C67 /* Build configuration list for PBXProject "Caldera" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -108,7 +108,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D708C5F92DF3FE3D003B9C67 /* garibaldi */,
+				D708C5F92DF3FE3D003B9C67 /* Caldera */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +276,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.aquavit.garibaldi;
+				PRODUCT_BUNDLE_IDENTIFIER = co.aquavit.caldera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -305,7 +305,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.aquavit.garibaldi;
+				PRODUCT_BUNDLE_IDENTIFIER = co.aquavit.caldera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -316,7 +316,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D708C5F52DF3FE3D003B9C67 /* Build configuration list for PBXProject "Garibaldi" */ = {
+		D708C5F52DF3FE3D003B9C67 /* Build configuration list for PBXProject "Caldera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D708C6032DF3FE3E003B9C67 /* Debug */,
@@ -325,7 +325,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D708C6052DF3FE3E003B9C67 /* Build configuration list for PBXNativeTarget "garibaldi" */ = {
+		D708C6052DF3FE3E003B9C67 /* Build configuration list for PBXNativeTarget "Caldera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D708C6062DF3FE3E003B9C67 /* Debug */,

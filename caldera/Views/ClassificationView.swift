@@ -1,6 +1,5 @@
 //
 //  ClassificationView.swift
-//  garibaldi
 //
 //  Created by John Matthew Weston on 11/8/25.
 //
