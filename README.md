@@ -2,7 +2,10 @@
 
 [Caldera](https://en.wikipedia.org/wiki/Caldera) is term that refers to the large cauldron-like hollow that forms after a volcanic eruption, from the Latin `caldaria` that means "cooking pot". 
 
-The volcano metaphor and terminology for the `Cinder Cone` and `Caldera` projects stem from the fact that bringing a camera online as a capture device and with a Metal pipeline creates an explosion of pixel data, a volcano of sorts. 🌋
+The volcano metaphor and terminology for the `Cinder Cone` and `Caldera` projects stem from two considerations.  🌋
+
+- First, the fact that bringing a camera online as a capture device and with a Metal pipeline creates an explosion of pixel data, a volcano of sorts.
+- Second, the fact that bringing a Metal display pipeline online can create an explosion of complexity until a measure twice, cut once approach and design rigor not followed.
 
 This project `Caldera` is a variation on that theme but a narrower focus on post processing and display of 2D **static** single frame images and 3D point clouds, in contrast to dynamic data captures.
 
