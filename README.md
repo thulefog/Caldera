@@ -20,9 +20,7 @@ The foundation models integration and forward pass wire up points that will be e
 
 See the `Reference` section for more details around some of the baseline Foundation Models from Apple.
 
---
-
-**Current State:** Under Construction 🚧
+---
 
 ## Contexts
 
@@ -73,9 +71,9 @@ There is a concept proof feature related to loading a 3D STL format point cloud 
 
 NOTE: Example STL point clouds were sourced from the NIH 3D download set, [here](https://3d.nih.gov/discover?q=brain&sort=relevant).
 
-----
+**Current State:** Under Construction 🚧
 
-# References
+---
 
 ## Prior Work: Historical Notes 🌋
 
@@ -84,6 +82,8 @@ As relates to the Metal texture display pathways - there are some common denonim
 This source code was a derivative of the [Cinder Code](https://github.com/thulefog/CinderCone/tree/develop) and, similarly, reflects a rewrite to remve external SOUP as part of the uplevel to latest Swift concurrency languages, 6.x and forward.
 
 This builds on and evolves forward development projects on iOS and in Swift, Objective-C, C++ and Metal - some dating back to 2016-2018 to bring up Metal based cameras on the iPhone in iOS.
+
+# References
 
 - Machine Learning Models
 
